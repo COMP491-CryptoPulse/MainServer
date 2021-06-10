@@ -1,6 +1,6 @@
 from app.main_app import create_app
 
-app = create_app()
+server = create_app()
 
 if __name__ == "__main__":
-    app.run()
+    server.run()
