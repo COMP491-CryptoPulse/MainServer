@@ -32,7 +32,7 @@ jobs:
     - name: Run Azure webapp deploy action using publish profile credentials
       uses: azure/webapps-deploy@v2
       with:
-        app-name: cryptopulse
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
         slot-name: Production
         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_05C2A31CE3534F6FA6AAC405C3168C0A }}
 
