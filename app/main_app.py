@@ -35,13 +35,3 @@ def create_app():
     with app.app_context():
         db.create_all()
     return app
-
-
-# TODO: MAKE PREDICTIONS WHEN THE POST IS COLLECTED AND SAVE IT TO DATABASE. IDEALLY THIS SHOULDN'T BE HERE.
-# predictor = Predictor("test_model", "Jun19_Feb21_Big")
-
-
-if __name__ == "__main__":
-    app = create_app()
-    # app.run(debug=True, ssl_context="adhoc")
-    app.run(debug=True)
