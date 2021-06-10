@@ -65,3 +65,4 @@ Werkzeug==2.0.1
 yarl==1.6.3
 yfinance==0.1.59
 gunicorn
+psycopg2-binary
