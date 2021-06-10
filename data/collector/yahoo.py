@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import yfinance as yf
 from datetime import datetime, timedelta
 import numpy as np
@@ -87,5 +86,4 @@ def _example_pull_request():
     """
     An example pull request for reference and debugging purposes.
     """
-    plt.plot(list(pull_coin_history(CoinType.doge, TimeRange(1559347200, 1612137600), "1h")["Price"]))
-    plt.show()
+    pass
