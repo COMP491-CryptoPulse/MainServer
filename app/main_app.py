@@ -1,4 +1,5 @@
 import os
+import threading
 
 from flask import Flask, send_from_directory
 from flask_cors import CORS
@@ -32,6 +33,8 @@ def create_app():
 
     # Initialize the database.
     db.init_app(app)
+    lock = threading.Lock()
     with app.app_context():
-        db.create_all()
+        with lock:
+            db.create_all()
     return app
