@@ -1,10 +1,10 @@
 import os
 
 config_path = os.path.dirname(__file__)
-app_db_uri = "sqlite:///" + config_path + "/app.db"
-data_db_uri = "sqlite:///" + config_path + "/data.db?check_same_thread=False"
-stream_db_uri = "sqlite:///" + config_path + "/stream.db"
-aggregate_db_uri = "sqlite:///" + config_path + "/aggregate.db"
+app_db_uri = "postgresql://postgresql-silhouetted-62641"
+data_db_uri = "postgresql://postgresql-silhouetted-62641"
+stream_db_uri = "postgresql://postgresql-silhouetted-62641"
+aggregate_db_uri = "postgresql://postgresql-silhouetted-62641"
 
 
 SQLALCHEMY_DATABASE_URI = app_db_uri
