@@ -2,7 +2,6 @@ import torch
 import torch.optim as optim
 import torch.nn as nn
 import numpy as np
-import matplotlib.pyplot as plt
 
 from data.dataset import CryptoSpeculationDataset
 from analysis.model import CryptoSpeculationModel
@@ -62,10 +61,6 @@ def train(model, dataset, device, epochs, batch_size, lr):
             losses[1].append(test_loss)
 
         print(f'Epoch {epoch + 1}: Training Loss: {training_loss:.4f}, Testing Loss: {test_loss: .4f}')
-
-    plt.plot(losses[0])
-    plt.plot(losses[1])
-    plt.show()
 
 
 def predict(model, predict_set, device, batch_size=1024):
