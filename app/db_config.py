@@ -1,10 +1,15 @@
 import os
 
 config_path = os.path.dirname(__file__)
-app_db_uri = os.environ.get('DATABASE_URL')
-data_db_uri = os.environ.get('DATABASE_URL')
-stream_db_uri = os.environ.get('DATABASE_URL')
-aggregate_db_uri = os.environ.get('DATABASE_URL')
+global_uri = os.environ["DATABASE_URL"]
+if global_uri.startswith("postgres://"):
+    global_uri = global_uri.replace("postgres://", "postgresql://", 1)
+
+
+app_db_uri = global_uri
+data_db_uri = global_uri
+stream_db_uri = global_uri
+aggregate_db_uri = global_uri
 
 
 SQLALCHEMY_DATABASE_URI = app_db_uri
