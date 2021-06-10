@@ -21,7 +21,7 @@ class User(db.Model):
     username = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
-    salt = db.Column(db.String(16), nullable=False)
+    salt = db.Column(db.String(128), nullable=False)
     follows = db.relationship("Follow", back_populates="user", cascade="all, delete", lazy=True)
     sessions = db.relationship("Session", back_populates="user", cascade="all, delete", lazy=True)
     notifications = db.relationship("Notification", cascade="all, delete")
