@@ -33,10 +33,8 @@ def create_app():
 
     # Initialize the database.
     db.init_app(app)
-    lock = threading.Lock()
     with app.app_context():
-        with lock:
-            db.create_all()
+        db.create_all()
     return app
 
 
