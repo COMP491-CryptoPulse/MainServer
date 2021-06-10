@@ -1,10 +1,10 @@
 import os
 
 config_path = os.path.dirname(__file__)
-app_db_uri = "postgresql://postgresql-silhouetted-62641"
-data_db_uri = "postgresql://postgresql-silhouetted-62641"
-stream_db_uri = "postgresql://postgresql-silhouetted-62641"
-aggregate_db_uri = "postgresql://postgresql-silhouetted-62641"
+app_db_uri = os.environ.get('DATABASE_URL')
+data_db_uri = os.environ.get('DATABASE_URL')
+stream_db_uri = os.environ.get('DATABASE_URL')
+aggregate_db_uri = os.environ.get('DATABASE_URL')
 
 
 SQLALCHEMY_DATABASE_URI = app_db_uri
