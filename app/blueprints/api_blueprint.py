@@ -60,7 +60,7 @@ def prepare_post_query(model, start, end, coin_type, sources, order_by, orderabl
             query = query.order_by(model.__table__.c[order_by])
     # Unique id filtering for posts.
     if group_by_unique_id:
-        query = query.group_by(model.__table__.c["unique_id"])
+        query = query.distinct(model.__table__.c["unique_id"])
     return query.limit(limit)
 
 
