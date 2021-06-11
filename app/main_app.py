@@ -1,18 +1,16 @@
 import os
 import threading
 
-from flask import Flask, send_from_directory
+from flask import Flask
 from flask_cors import CORS
 
 from data.database import db
 from app.db_config import configure_database
 from app.blueprints import user_blueprint, api_blueprint, stream_blueprint, update_blueprint
 
-NPM_OUT = "../web/out"
-
 
 def create_app():
-    app = Flask(__name__, static_folder=NPM_OUT, static_url_path="/static")
+    app = Flask(__name__)
     app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
     app.config["JSONIFY_PRETTYPRINT_REGULAR"] = True
     CORS(app)
@@ -21,15 +19,6 @@ def create_app():
     app.register_blueprint(api_blueprint, url_prefix="/api")
     app.register_blueprint(stream_blueprint, url_prefix="/stream")
     app.register_blueprint(update_blueprint, url_prefix="/update")
-
-    # Route the frontend.
-    @app.route("/app")
-    @app.route("/app/")
-    @app.route("/app/<page>")
-    def web_app(page: str = "index"):
-        # LOL!
-        page += ".html"
-        return send_from_directory(NPM_OUT, page)
 
     # Initialize the database.
     db.init_app(app)
