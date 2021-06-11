@@ -82,6 +82,11 @@ def get_user_info(form, session):
     shown_user.pop("password")
     shown_user.pop("salt")
     shown_user.pop("sessions")
+    # Order the follows.
+    shown_user["follows"] = sorted(shown_user["follows"], key=lambda f: f.id)
+    # Order the triggers.
+    for f in shown_user["follows"]:
+        f["triggers"] = sorted(f["triggers"], key=lambda t: t.id)
     return jsonify({"result": "ok", "userinfo": shown_user})
 
 
