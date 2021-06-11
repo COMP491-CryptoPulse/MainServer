@@ -185,6 +185,7 @@ def get_streamed_aggregate_post_counts():
     post_counts = StreamedAggregatePostCount.query \
         .filter(StreamedAggregatePostCount.time >= start) \
         .filter(StreamedAggregatePostCount.source == "coin:" + coin_type.value) \
+        .order_by(desc(func.count(StreamedAggregatePostCount.time))) \
         .all()
     return jsonify(post_counts)
 
@@ -201,6 +202,7 @@ def get_aggregate_post_counts():
         .filter(AggregatePostCount.time <= end) \
         .filter(AggregatePostCount.time >= start) \
         .filter(AggregatePostCount.source == "coin:" + coin_type.value) \
+        .order_by(desc(func.count(AggregatePostCount.time))) \
         .all()
     post_counts = [dataclasses.asdict(p) for p in post_counts]
     for p in post_counts:
