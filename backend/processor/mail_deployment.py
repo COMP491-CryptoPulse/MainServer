@@ -51,7 +51,7 @@ class Mailer:
             self.mail.send(msg)
 
     def send_reset_mail(self, email: str, code: str):
-        link = "http://localhost:3000/change-password?code=" + code
+        link = "https://cryptopulse.in/app/change-password/?code=" + code
         user = User.query.filter(User.email == email).first()
         email = user.email
         subject = "Password Reset"
