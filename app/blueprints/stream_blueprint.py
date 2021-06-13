@@ -16,9 +16,10 @@ def parse_twitter_post(user, content) -> iter:
     for coin, keywords in COIN_KEYWORDS.items():
         for keyword in keywords:
             if "#" + keyword in content:
-                post_info.append((coin, keyword))
-    for coin, keyword in post_info:
-        yield StreamedPost(coin_type=coin, user=user, content=content, source="twitter/" + keyword.lower(),
+                post_info.append((coin, keywords[0],))
+                break
+    for coin, tag in post_info:
+        yield StreamedPost(coin_type=coin, user=user, content=content, source="twitter/" + tag.lower(),
                            time=curr_time)
 
 

@@ -229,7 +229,7 @@ def get_aggregate_post_impacts():
         .filter(Post.coin_type == coin_type) \
         .all()
     # Convert to impact vectors.
-    impact_vectors = [numpy.frombuffer(p.impact) for p in posts]
+    impact_vectors = filter(lambda v: len(v) == 4, [list(numpy.frombuffer(p.impact)) for p in posts])
     # Take the average.
     average = [0.0, 0.0, 0.0, 0.0]
     for v in impact_vectors:
