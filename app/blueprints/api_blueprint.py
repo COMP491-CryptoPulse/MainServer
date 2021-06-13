@@ -93,7 +93,7 @@ def get_posts():
         from_bound = None
     posts = [dataclasses.asdict(p) for p in
              prepare_post_query(Post, start, end, coin_type, sources, order_by,
-                                ["interaction", "impact", "time", "user"],
+                                ["interaction", "avg_impact", "time", "user"],
                                 from_bound, desc, limit, group_by_unique_id=True).all()]
     # Replace the impact values by their float array representation.
     for p in posts:
