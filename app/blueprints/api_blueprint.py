@@ -223,13 +223,13 @@ def get_aggregate_post_impacts():
     coin_type = get_coin_type_arg()
     if coin_type is None:
         return jsonify({"result": "error", "error_msg": "Invalid coin type."})
-    posts = Post.query \
+    posts = db.session.query(Post.impact) \
         .filter(Post.time <= end) \
         .filter(Post.time >= start) \
         .filter(Post.coin_type == coin_type) \
         .all()
     # Convert to impact vectors.
-    impact_vectors = filter(lambda v: len(v) == 4, [list(numpy.frombuffer(p.impact)) for p in posts])
+    impact_vectors = list(filter(lambda v: len(v) == 4, [list(numpy.frombuffer(p.impact)) for p in posts]))
     # Take the average.
     average = [0.0, 0.0, 0.0, 0.0]
     for v in impact_vectors:
@@ -237,6 +237,8 @@ def get_aggregate_post_impacts():
         average[1] += v[1]
         average[2] += v[2]
         average[3] += v[3]
+    for i in range(len(impact_vectors)):
+        average[i] = average[i] / len(impact_vectors)
     return jsonify(average)
 
 
