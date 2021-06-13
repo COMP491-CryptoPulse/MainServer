@@ -237,8 +237,9 @@ def get_aggregate_post_impacts():
         average[1] += v[1]
         average[2] += v[2]
         average[3] += v[3]
-    for i in range(4):
-        average[i] = average[i] / len(impact_vectors)
+    if len(impact_vectors) > 0:
+        for i in range(4):
+            average[i] = average[i] / len(impact_vectors)
     return jsonify(average)
 
 
