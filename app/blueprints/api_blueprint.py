@@ -223,12 +223,21 @@ def get_aggregate_post_impacts():
     coin_type = get_coin_type_arg()
     if coin_type is None:
         return jsonify({"result": "error", "error_msg": "Invalid coin type."})
-    post_counts = AggregatePostImpact.query \
-        .filter(AggregatePostImpact.time <= end) \
-        .filter(AggregatePostImpact.time >= start) \
-        .filter(AggregatePostImpact.source == "coin:" + coin_type.value) \
+    posts = Post.query \
+        .filter(Post.time <= end) \
+        .filter(Post.time >= start) \
+        .filter(Post.coin_type == coin_type) \
         .all()
-    return jsonify(post_counts)
+    # Convert to impact vectors.
+    impact_vectors = [numpy.frombuffer(p.impact) for p in posts]
+    # Take the average.
+    average = [0.0, 0.0, 0.0, 0.0]
+    for v in impact_vectors:
+        average[0] += v[0]
+        average[1] += v[1]
+        average[2] += v[2]
+        average[3] += v[3]
+    return jsonify(average)
 
 
 @api_blueprint.route("/coin_stats")
